@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel;
 
 namespace LearningAglorithms.Base
 {
@@ -11,9 +6,26 @@ namespace LearningAglorithms.Base
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
-        public void OnPropertyChanged(string propertyName)
+        protected void OnPropertyChanged(string propertyName)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
+
+        // Example of a DependencyProperty-like property for the card number
+        private int _cardNumber;
+        public int CardNumber
+        {
+            get { return _cardNumber; }
+            set
+            {
+                if (_cardNumber != value)
+                {
+                    _cardNumber = value;
+                    OnPropertyChanged(nameof(CardNumber));
+                }
+            }
+        }
     }
 }
+
+
